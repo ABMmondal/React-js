@@ -1,11 +1,13 @@
 import { useState ,useEffect} from 'react'
 import './App.css'
 import { ToDoProvider } from './context/index'
+import TodoForm from './components/ToDoform'
+import TodoItem from './components/ToDoItem'
 export default function App() {
   const [todos, setTodos] = useState([])
 
   const addToDo =(todo)=>{
-    setTodos((prev)=>[...prev,{id: Math.random().toString(), todo}])
+    setTodos((prev)=> [{id: Date.now(), ...todo}, ...prev] )
   }
 
   const UpdateToDo =(id,todo)=>{
@@ -41,9 +43,15 @@ export default function App() {
           <h1 className="text-2xl font-bold text-center mb-8 mt-2">Manage Your Todos</h1>
           <div className="mb-4">
             {/* Todo form goes here */}
+            <TodoForm/>
           </div>
           <div className="flex flex-wrap gap-y-3">
             {/*Loop and Add TodoItem here */}
+            {todos.map( todo =>(
+              <div className='w-full' key={todo.id}>
+                <TodoItem todo={todo}/>
+              </div>
+            ))}
           </div>
         </div>
       </div>
