@@ -22,16 +22,21 @@ export default function App() {
     setTodos((prev)=>prev.map((item)=>item.id === id? {...item,completed :!item.completed} :  item) )
   }
 
-  useEffect(() => {
-   const todos = JSON.parse(localStorage.getItem("todos")) 
-   if (todos && todos.length>0) {
-    setTodos(todos)
-  } 
-  }, [])
   
-  useEffect(()=>{
-    localStorage.setItem('todos ',JSON.stringify(todos))
-  },[todos])
+
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem("todos"))
+
+    if (todos && todos.length > 0) {
+      setTodos(todos)
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+  }, [todos])
+  
+
 
 
   
